@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6366F1" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rosilaine Silva – LLM Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #F9FAFB;
+      color: #111827;
+    }
+
+    header {
+      background-color: #6366F1;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    h2 {
+      color: #6366F1;
+    }
+
+    a {
+      color: #6366F1;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .project-card {
+      background-color: #f5f7ff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #dbeafe;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-top: 1rem;
+    }
+
+    .project-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background-color: #4f46e5;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      color: #6B7280;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to My LLM Project Portfolio</h1>
+  </header>
+
+  <main class="content">
+    <h2>About me 👋</h2>
+    <p>
+      I'm a senior product manager and computer engineer, with an MBA in Data Science and a specialization in Complex Data Mining. 
+      Throughout my career, I've led digital product portfolios in telecom, insurance, and retail, working with cross-functional 
+      teams and aligning business goals with technology strategy.
+    </p>
+
+    <h2>💡 Why LLMs?</h2>
+    <p>
+      I started exploring LLMs to combine my background in data strategy, product management, and machine learning.
+      The rapid evolution of tools like LangChain, Groq, and open-source models like LLaMA3 inspired me to create 
+      practical tools for document understanding, retrieval-augmented generation (RAG), and NLP evaluation.
+    </p>
+
+    <h2>📂 Projects</h2>
+    <p>
+      You can explore my latest LLM project below, which includes interactive examples, screenshots, and use cases. More projects will be added soon.
+    </p>
+
+    <!-- 🔷 Project Card -->
+    <div class="project-card">
+      <h3>🤖 LLM Chat Assistant</h3>
+      <p>
+        This project is a multi-tab assistant built with <strong>LangChain</strong>, <strong>Gradio</strong>, and 
+        <strong>LLaMA3 via Groq API</strong>.
+        It demonstrates document-based Q&A (RAG), personality-based chat, Wikipedia summarization, and answer evaluation
+        using NLP metrics like ROUGE and BERTScore.
+      </p>
+      <a href="documentation/index.html" class="project-button">📘 View Full Documentation</a>
+    </div>
+  </main>
+
+  <footer>
+    Thanks for visiting!<br />
+    — Rosilaine Silva
+  </footer>
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.error("Service Worker registration failed:", err));
+  }
+</body>
+</html>

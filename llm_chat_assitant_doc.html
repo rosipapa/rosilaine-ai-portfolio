@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6366F1" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LLM Chat Assistant - Documentation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #F9FAFB;
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #6366F1;
+      color: white;
+      padding: 1rem 2rem; /* reduzido */
+      width: 100%;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem; /* menor */
+      font-weight: 600;
+    }
+
+    .content {
+      max-width: 700px; /* um pouco menor */
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 1.2rem 1.5rem; /* menos padding */
+      margin: 1.5rem 1rem;
+      min-height: 280px; /* altura reduzida */
+      position: relative;
+      font-size: 0.9rem; /* fonte menor */
+      line-height: 1.4;
+      overflow-y: auto;
+    }
+
+    h2 {
+      color: #6366F1;
+      font-size: 1.25rem; /* menor */
+      margin-bottom: 0.75rem;
+    }
+
+    p, ul {
+      line-height: 1.4;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul {
+      margin-left: 1.2rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      background-color: #6366F1;
+      border: none;
+      color: white;
+      padding: 0.4rem 1rem; /* menos padding */
+      border-radius: 8px;
+      font-size: 0.9rem; /* fonte menor */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      min-width: 70px;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #4F46E5;
+    }
+
+    button:disabled {
+      background-color: #A5B4FC;
+      cursor: default;
+    }
+
+    footer {
+      margin: 1.5rem 0;
+      color: #6B7280;
+      font-size: 0.85rem;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>LLM Chat Assistant - Project Documentation</h1>
+</header>
+
+<main class="content" id="slide-content">
+  <!-- Slide content dynamically injected here -->
+</main>
+
+<div class="buttons">
+  <button id="btn-home">Home</button>
+  <button id="btn-prev">Previous</button>
+  <button id="btn-next">Next</button>
+</div>
+
+<footer>
+  Thanks for reviewing this documentation! — Rosilaine Silva
+</footer>
+
+<script>
+  const slides = [
+    {
+      title: "Project Overview",
+      content: `
+        <p>
+          This project is an interactive AI assistant designed to help users explore and understand large documents,
+          engage in personalized chat, summarize Wikipedia content, and evaluate answers.
+          It showcases how cutting-edge language models can be applied practically to solve real-world problems like
+          document search, learning assistance, and quality control of generated content.
+        </p>
+        <p>
+          The goal is to demonstrate a user-friendly interface that combines advanced AI capabilities with practical business use cases —
+          perfect for decision-makers looking to leverage AI in their products.
+        </p>
+      `
+    },
+
+{
+  title: "Project Strategy: From Idea to Production",
+  content: `
+    <p>This project was planned following data science best practices adapted from the CRISP-DM framework.</p>
+    <ul>
+      <li><strong>Business Understanding:</strong> Define user needs and use cases for document search and interactive chat.</li>
+      <li><strong>Data Understanding:</strong> Analyze document types, volume, and complexity to guide the embedding strategy.</li>
+      <li><strong>Data Preparation:</strong> Chunk documents, generate embeddings, and build a vector index for fast retrieval.</li>
+      <li><strong>Modeling:</strong> Select LLM models and design prompts to produce accurate and relevant responses.</li>
+      <li><strong>Evaluation:</strong> Use automated NLP metrics and user feedback to continuously improve results.</li>
+      <li><strong>Deployment:</strong> Plan for scaling, monitoring, and maintaining system reliability under real-world loads.</li>
+    </ul>
+  `
+},
+
+
+    {
+      title: "Features Summary",
+      content: `
+        <ul>
+          <li><strong>Model Selection:</strong> Choose between LLaMA3 8B and 70B models</li>
+          <li><strong>Personality Settings:</strong> Default, Didactic, Objective, Creative</li>
+          <li><strong>Temperature Control:</strong> Adjust response creativity</li>
+          <li><strong>Multi-PDF Support:</strong> Upload and index multiple PDFs for document Q&A</li>
+          <li><strong>Conversation History:</strong> Maintains chat context for coherent responses</li>
+          <li><strong>Answer Evaluation:</strong> Automated scoring with multiple NLP metrics</li>
+        </ul>
+      `
+    },
+    {
+      title: "PDF + RAG + Personality Tab",
+      content: `
+        <p>Upload one or more PDFs to index their content using vector search and embeddings. Ask questions based on the documents, with answers tailored by selected personality and model parameters.</p>
+        <p><strong>Technologies:</strong> PyPDFLoader, FAISS, SentenceTransformer embeddings, LangChain, Groq LLaMA3 API.</p>
+        <img src="screenshots/pdf_rag_example.png" alt="PDF RAG Interface">
+      `
+    },
+    {
+      title: "Conversational Chat Tab",
+      content: `
+        <p>Chat interactively with the assistant using personality presets. The session retains history to improve answer relevance.</p>
+        <p><strong>Technologies:</strong> LangChain chat interface, Groq LLaMA3 API, Gradio chatbot widget.</p>
+        <img src="screenshots/chat_interface_example.png" alt="Chat Interface">
+      `
+    },
+    {
+      title: "Answer Evaluation Tab",
+      content: `
+        <p>Generate model answers and compare against ideal responses using multiple NLP metrics: ROUGE-L, BERTScore, and Jaccard similarity.</p>
+        <p><strong>Technologies:</strong> rouge_score, bert_score, custom token similarity functions.</p>
+        <img src="screenshots/answer_evaluation_example.png" alt="Answer Evaluation">
+      `
+    },
+    {
+      title: "Wikipedia + LLaMA3 Tab",
+      content: `
+        <p>Query Wikipedia content in Portuguese, summarized or explained by LLaMA3 in various styles: summary, didactic, or advanced technical.</p>
+        <p><strong>Technologies:</strong> LangChain WikipediaAPIWrapper, Groq LLaMA3 API.</p>
+        <img src="screenshots/wikipedia_tab_example.png" alt="Wikipedia Tab Interface">
+      `
+    },
+
+{
+  title: "Technology Stack & Architecture",
+  content: `
+    <p>
+      This project integrates several modern tools to build an efficient and modular LLM application.
+    </p>
+    <ul>
+      <li><strong>LangChain:</strong> Acts as the orchestration layer, managing prompts, memory, tools, and chaining steps across multiple components.</li>
+      <li><strong>Gradio:</strong> Provides the interactive web interface, enabling users to interact with the assistant without complex frontend development.</li>
+      <li><strong>Groq API + LLaMA3:</strong> Runs state-of-the-art open-source LLMs (like LLaMA3-8B and 70B) with ultra-fast response time via Groq’s high-performance inference engine.</li>
+      <li><strong>PyPDFLoader:</strong> Extracts and splits content from PDF documents for downstream processing.</li>
+      <li><strong>SentenceTransformers:</strong> Converts text chunks into embeddings (vector representations) used for semantic search.</li>
+      <li><strong>FAISS:</strong> Serve as vector databases that store embeddings and perform fast similarity searches to retrieve the most relevant document chunks.</li>
+    </ul>
+    <p>
+      The assistant is organized into multiple tabs — PDF Q&A, Conversational Chat, Wikipedia Summarization, and Answer Evaluation — each with specific flows and capabilities, following a modular architecture.
+    </p>
+  `
+},
+{
+  title: "Sample Prompt & Personalization",
+  content: `
+    <p>
+      To adapt the assistant's tone and behavior, we use a personality-based system prompt selector.
+      The user can choose between "Didactic", "Objective", or "Creative" styles. Each one maps to a custom instruction
+      injected into the system prompt.
+    </p>
+
+    <pre style="background:#f3f4f6;padding:1rem;border-radius:8px;overflow-x:auto;"><code>
+style_prompt = {
+  "Default": "You are a helpful assistant who answers based on the documents below.",
+  "Didactic": "Explain in a clear and educational way, as if you are teaching.",
+  "Objective": "Respond directly, without unnecessary details.",
+  "Creative": "Answer in an engaging and imaginative way, while remaining accurate."
+}
+
+prompt_template = f"""
+{style_prompt.get(personality, style_prompt['Default'])}
+
+Context:
+{{context}}
+
+Question:
+{{question}}
+
+If you don't know the answer, say clearly that you don't know.
+"""
+    </code></pre>
+
+    <p>
+      This modular prompt structure enables <strong>response personalization</strong> while maintaining reliability and grounding.
+    </p>
+  `
+},
+{
+  title: "Answer Evaluation Metrics",
+  content: `
+    <p>To ensure answer quality, multiple NLP metrics are used to compare outputs from LLaMA3 and ChatGPT:</p>
+    <ul>
+      <li><strong>ROUGE-L:</strong> 0.1771 — measures sequence matching and phrase overlap.</li>
+      <li><strong>BERTScore (F1):</strong> 0.8402 — uses contextual embeddings to evaluate semantic similarity.</li>
+      <li><strong>Jaccard Similarity:</strong> 0.1608 — token-based overlap metric comparing responses.</li>
+    </ul>
+    <p>
+      The results show a moderate phrase overlap (ROUGE-L), high semantic similarity (BERTScore), and some lexical overlap (Jaccard), 
+      indicating that while the responses differ in exact wording, they convey similar meanings and concepts. 
+      This suggests that the models produce accurate and relevant answers, but with some variation in expression.
+    </p>
+  `
+},
+{
+  title: "Model Trade-Offs: LLaMA3 8B vs 70B",
+  content: `
+    <p>
+      In this project, one key trade-off to consider is the choice of language model. Depending on the use case, user expectations, and infrastructure limitations, selecting between a lighter or more powerful model directly impacts the product experience.
+    </p>
+    <ul>
+      <li><strong>LLaMA3 70B:</strong> Offers superior coherence, deeper reasoning, and higher-quality outputs. Best suited for complex queries, enterprise scenarios, or where accuracy is critical. Requires more resources and introduces higher latency.</li>
+      <li><strong>LLaMA3 8B:</strong> Much faster and more cost-efficient. Ideal for prototyping, experimentation, and real-time interaction where ultra-high accuracy is not mandatory.</li>
+    </ul>
+    <p>
+      In this prototype, both models were evaluated. The 8B model was used for fast iteration and usability testing, while the 70B was benchmarked for quality and metric comparison.
+    </p>
+    <p>
+      <strong>Conclusion:</strong> Choosing the right model involves balancing speed, cost, and quality — a critical decision for deploying LLM-based products at scale.
+    </p>
+  `
+},
+
+{
+  title: "Roadmap: Next Steps & Future Vision",
+  content: `
+    <h3>Version 1 (Current)</h3>
+    <ul>
+      <li>Multi-tab assistant: PDF Q&A, Conversational Chat, Wikipedia Summarization, Answer Evaluation</li>
+      <li>Customizable personalities and prompt engineering</li>
+      <li>Vector search with embeddings via FAISS / ChromaDB</li>
+      <li>Automated answer quality metrics (ROUGE, BERTScore, Jaccard)</li>
+    </ul>
+
+    <h3>Version 2 (Upcoming)</h3>
+    <ul>
+      <li><strong>Statistics & Insights Tab:</strong> Real-time token usage, word frequency, session analytics, and top user queries</li>
+      <li>Basic monitoring dashboard for usage and performance</li>
+    </ul>
+
+    <h3>Version 3 (Future Vision)</h3>
+    <ul>
+      <li><strong>Multimodal Generation:</strong> Image creation via Stable Diffusion integration based on chat context</li>
+      <li>Improved multi-PDF handling with metadata filters (date, source, topic)</li>
+      <li>User feedback loop integration for continuous model tuning</li>
+    </ul>
+  `
+},
+
+
+{
+  title: "Challenges for Real-World Deployment",
+  content: `
+    <p>Building a real-world LLM assistant involves far more than the prototype stage. Several key challenges must be addressed to ensure reliability, scalability, and business value:</p>
+    <ul>
+      <li><strong>Latency & Throughput:</strong> Real-time response with low latency for multiple users requires GPU acceleration and optimized APIs.</li>
+      <li><strong>Scalability:</strong> Handling millions of documents and users demands distributed infrastructure, vector sharding, and cloud-based scaling.</li>
+      <li><strong>Data Freshness:</strong> Keeping embeddings updated when documents or databases change requires automated pipelines and triggers.</li>
+      <li><strong>Security & Privacy:</strong> Sensitive documents must be handled with robust authentication, encryption, and access control.</li>
+      <li><strong>Evaluation:</strong> Continuous quality monitoring and user feedback loops are critical for improvement.</li>
+    </ul>
+  `
+},
+{
+  title: "Real-World Vector Pipeline Example",
+  content: `
+    <p>To scale the assistant for production with millions of documents (e.g., invoices, orders, contracts), the following pipeline is used:</p>
+    <ol>
+      <li><strong>1. Data Ingestion:</strong> Load data from sources such as Snowflake, BigQuery, or document storage daily.</li>
+      <li><strong>2. Chunking:</strong> Split each document into smaller pieces (e.g., 200-500 words) to preserve semantic meaning.</li>
+      <li><strong>3. Embedding Generation:</strong> Convert each chunk into a vector using a model like <code>sentence-transformers/all-MiniLM-L6-v2</code>.</li>
+      <li><strong>4. Storage in Vector DB:</strong> Store embeddings + metadata (ID, source, date) in a vector database such as <strong>ChromaDB, Weaviate, Pinecone</strong> or <strong>FAISS (on-disk or memory)</strong>.</li>
+      <li><strong>5. Retrieval:</strong> At query time, user input is embedded and compared via similarity search to retrieve the top-k relevant chunks.</li>
+    </ol>
+    <p><strong>ChromaDB:</strong> Ideal for prototyping and lightweight deployments. <strong>Pinecone/Weaviate:</strong> Recommended for scalable, managed vector search in production. <strong>FAISS:</strong> High-performance for self-hosted solutions.</p>
+  `
+},
+
+
+    {
+      title: "Final Considerations",
+      content: `
+        <p>This project was developed as a practical case to validate the use of LLMs in real business scenarios.</p>
+        <p>The main objective is to demonstrate leadership in AI/LLM initiatives with a product-focused approach, aligning technology, usability, and customer value.</p>
+        <p>It serves as a proof of concept to support decision-making and continuous improvement in AI-driven products.</p>
+      `
+    }
+  ];
+
+  let currentIndex = 0;
+
+
+function showSlide(index) {
+  const slide = slides[index];
+  const container = document.getElementById('slide-content');
+  container.innerHTML = `<h2>${slide.title}</h2>${slide.content}`;
+  currentIndex = index;
+  updateButtons();
+}
+
+  function updateButtons() {
+    document.getElementById('btn-prev').disabled = currentIndex === 0;
+    document.getElementById('btn-next').disabled = currentIndex === slides.length - 1;
+  }
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    if (currentIndex > 0) showSlide(currentIndex - 1);
+  });
+
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) showSlide(currentIndex + 1);
+  });
+
+  document.getElementById('btn-home').addEventListener('click', () => {
+    showSlide(0);
+  });
+
+  // Initialize
+  showSlide(0);
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.error("Service Worker registration failed:", err));
+  }
+</script>
+
+</body>
+</html>
