@@ -49,6 +49,15 @@
       overflow-y: auto;
     }
 
+    .content img {
+      max-width: 100%;   /* Para não ultrapassar a largura do container */
+      height: auto;      /* Mantém a proporção da imagem */
+      max-height: 300px; /* Limita a altura para não ficar muito grande */
+      display: block;
+      margin: 1rem auto; /* Centraliza e dá espaçamento vertical */
+      border-radius: 8px; /* Se quiser manter o estilo */
+    }
+
     h2 {
       color: #6366F1;
       font-size: 1.25rem; /* menor */
@@ -179,7 +188,7 @@
       content: `
         <p>Upload one or more PDFs to index their content using vector search and embeddings. Ask questions based on the documents, with answers tailored by selected personality and model parameters.</p>
         <p><strong>Technologies:</strong> PyPDFLoader, FAISS, SentenceTransformer embeddings, LangChain, Groq LLaMA3 API.</p>
-        <img src="screenshots/pdf_rag_example.png" alt="PDF RAG Interface">
+        <img src="screenshots/chat_pdf.jpg" alt="PDF RAG Interface">
       `
     },
     {
@@ -187,7 +196,7 @@
       content: `
         <p>Chat interactively with the assistant using personality presets. The session retains history to improve answer relevance.</p>
         <p><strong>Technologies:</strong> LangChain chat interface, Groq LLaMA3 API, Gradio chatbot widget.</p>
-        <img src="screenshots/chat_interface_example.png" alt="Chat Interface">
+        <img src="screenshots/chat.jpg" alt="Chat Interface">
       `
     },
     {
@@ -195,7 +204,7 @@
       content: `
         <p>Generate model answers and compare against ideal responses using multiple NLP metrics: ROUGE-L, BERTScore, and Jaccard similarity.</p>
         <p><strong>Technologies:</strong> rouge_score, bert_score, custom token similarity functions.</p>
-        <img src="screenshots/answer_evaluation_example.png" alt="Answer Evaluation">
+        <img src="screenshots/metrics.jpg" alt="Answer Evaluation">
       `
     },
     {
@@ -203,7 +212,7 @@
       content: `
         <p>Query Wikipedia content in Portuguese, summarized or explained by LLaMA3 in various styles: summary, didactic, or advanced technical.</p>
         <p><strong>Technologies:</strong> LangChain WikipediaAPIWrapper, Groq LLaMA3 API.</p>
-        <img src="screenshots/wikipedia_tab_example.png" alt="Wikipedia Tab Interface">
+        <img src="screenshots/wiki.jpg" alt="Wikipedia Tab Interface">
       `
     },
 
