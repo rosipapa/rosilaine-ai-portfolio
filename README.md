@@ -1,4 +1,4 @@
-# 🧠 Rosilaine Silva – AI Product Portfolio
+# 🧠 Rosilaine Silva – AI LLM Product Portfolio
 This repository contains interactive project documentation pages for selected AI and LLM-based applications I’ve developed.
 
 Each project includes:
