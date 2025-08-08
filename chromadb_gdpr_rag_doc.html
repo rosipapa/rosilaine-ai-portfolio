@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6366F1" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GDPR with ChromaDB and RAG - Documentation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #F9FAFB;
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #6366F1;
+      color: white;
+      padding: 1rem 2rem; /* reduzido */
+      width: 100%;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem; /* menor */
+      font-weight: 600;
+    }
+
+    .content {
+      max-width: 700px; /* um pouco menor */
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 1.2rem 1.5rem; /* menos padding */
+      margin: 1.5rem 1rem;
+      min-height: 280px; /* altura reduzida */
+      position: relative;
+      font-size: 0.9rem; /* fonte menor */
+      line-height: 1.4;
+      overflow-y: auto;
+    }
+
+    .content img {
+      max-width: 100%;   /* Para não ultrapassar a largura do container */
+      height: auto;      /* Mantém a proporção da imagem */
+      max-height: 300px; /* Limita a altura para não ficar muito grande */
+      display: block;
+      margin: 1rem auto; /* Centraliza e dá espaçamento vertical */
+      border-radius: 8px; /* Se quiser manter o estilo */
+    }
+
+    h2 {
+      color: #6366F1;
+      font-size: 1.25rem; /* menor */
+      margin-bottom: 0.75rem;
+    }
+
+    p, ul {
+      line-height: 1.4;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul {
+      margin-left: 1.2rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      background-color: #6366F1;
+      border: none;
+      color: white;
+      padding: 0.4rem 1rem; /* menos padding */
+      border-radius: 8px;
+      font-size: 0.9rem; /* fonte menor */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      min-width: 70px;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #4F46E5;
+    }
+
+    button:disabled {
+      background-color: #A5B4FC;
+      cursor: default;
+    }
+
+    footer {
+      margin: 1.5rem 0;
+      color: #6B7280;
+      font-size: 0.85rem;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GDPR with ChromaDB and RAG - Documentation</h1>
+</header>
+
+<main class="content" id="slide-content">
+  <!-- Slide content dynamically injected here -->
+</main>
+
+<div class="buttons">
+  <button id="btn-home">Home</button>
+  <button id="btn-prev">Previous</button>
+  <button id="btn-next">Next</button>
+</div>
+
+<footer>
+  Thanks for reviewing this documentation! — Rosilaine Silva
+</footer>
+
+<script>
+  const slides = [
+   
+{
+  title: "Project Introduction",
+  content: `
+    <p>
+      This project shows how Artificial Intelligence can help understand large and complex documents —
+      like laws or manuals — and answer questions about them in simple language.
+    </p>
+    <p>
+      It works by transforming the document into a special searchable format called a <strong>vector database</strong>,
+      using AI language models. This means the assistant can find relevant information even if the question is asked differently
+      than the original text — a method known as <strong>Retrieval-Augmented Generation (RAG)</strong>.
+    </p>
+    <p>
+      In this demo, the system processes the entire GDPR regulation PDF and can answer specific questions about it.
+      The process is split into two clear steps:
+      <ol>
+        <li>Preparing the data and creating the vector database.</li>
+        <li>Searching and answering questions using a Large Language Model (LLM).</li>
+      </ol>
+      This way, the document only needs to be processed once, saving time and resources.
+    </p>
+  `
+},
+
+{
+  title: "What is ChromaDB?",
+  content: `
+    <p>
+      You might wonder — what is a <strong>vector database</strong> anyway?
+      Think of it as a smart storage system that helps AI quickly find pieces of text based on their meaning,
+      not just exact words.
+    </p>
+    <p>
+      <strong>ChromaDB</strong> is one such vector database. It’s open-source and designed to efficiently store and search
+      these “meaning-based” text pieces — called <em>embeddings</em> — even when working with huge amounts of data.
+    </p>
+    <p>
+      It provides an easy way to save text chunks and their embeddings, find the most relevant ones for a question,
+      and keep extra info attached.
+    </p>
+    <p>
+      In this project, ChromaDB acts as the memory that holds all processed text and their vector representations,
+      so the AI assistant can quickly find the right information when asked.
+    </p>
+  `
+},
+
+{
+  title: "ChromaDB vs Other Vector DBs",
+  content: `
+    <p>Here’s how ChromaDB compares to some other popular vector databases:</p>
+    <ul>
+      <li><strong>ChromaDB</strong> – lightweight, easy to use locally, great for demos and prototypes.</li>
+      <li><strong>FAISS</strong> – fast local library often used behind the scenes in larger systems.</li>
+      <li><strong>Pinecone / Milvus / Weaviate</strong> – cloud or distributed solutions with extra features for production use.</li>
+    </ul>
+    <p>
+      We chose ChromaDB here because it supports persistent storage on Google Drive and
+      clearly demonstrates key concepts of vector databases in a simple workflow.
+    </p>
+  `
+},
+
+{
+  title: "Project Structure (two parts)",
+  content: `
+    <p>This project is organized into two main parts for clarity and reusability:</p>
+    <ol>
+      <li><strong>Part 1 — Data Preparation & Vector Store Creation:</strong> process PDF, split into chunks, embed, and save in ChromaDB.</li>
+      <li><strong>Part 2 — Querying & Retrieval with LLM Integration:</strong> load saved data, search for relevant chunks, and generate answers.</li>
+    </ol>
+    <p>This lets you index the document once, then ask many questions without reprocessing the PDF each time.</p>
+  `
+},
+
+{
+  title: "Part 1 — What is saved in ChromaDB",
+  content: `
+    <p>
+      When creating the vector database, we save two main things in ChromaDB:
+    </p>
+    <ul>
+      <li><strong>Chunks:</strong> smaller pieces of text created by splitting the PDF into manageable parts (parameters control chunk size and overlap).</li>
+      <li><strong>Embeddings:</strong> numerical vector representations of each chunk, created by a pre-trained sentence transformer model (e.g., <code>all-MiniLM-L6-v2</code> produces 384-dimensional vectors).</li>
+    </ul>
+    <p>
+      All these files are saved persistently on Google Drive (or locally if Drive isn’t available),
+      so the data remains available across sessions.
+    </p>
+  `
+},
+
+{
+  title: "Part 1 — Indexing parameters & sample JSON",
+  content: `
+    <p>You can customize important settings when preparing your data:</p>
+    <ul>
+      <li><strong>chunk_size</strong> (e.g., 1000 characters) — larger chunks keep more context but might be less precise for retrieval.</li>
+      <li><strong>chunk_overlap</strong> (e.g., 200 characters) — repeats some text between chunks to preserve continuity.</li>
+    </ul>
+    <p>
+      The process also creates a sample JSON file showing about 10 chunks and the first few embedding values,
+      useful for debugging and verification but not needed for searching.
+    </p>
+  `
+},
+
+{
+  title: "Part 1 — UI (Indexing Screen)",
+  content: `
+    <p>
+      Start here! This user-friendly interface lets you prepare your document for smart search:
+    </p>
+    <ul>
+      <li><strong>Upload a PDF</strong> (e.g., the GDPR document).</li>
+      <li>Adjust how big each text chunk is and how much they overlap to keep context.</li>
+      <li>Process the document to split text, create vector embeddings, and save everything to Google Drive.</li>
+      <li>After processing, see how many chunks were created, estimate database size, and download a sample JSON of chunks and their “vector fingerprints.”</li>
+    </ul>
+    <p>
+      This step usually happens just once or when updating data. Here’s what it looks like:
+    </p>
+    <img src="chroma1.jpg" alt="ChromaDB Indexing Interface" style="max-width: 100%; height: auto;" />
+  `
+},
+
+{
+  title: "Part 2 — Querying & Retrieval with LLM",
+  content: `
+    <p>
+      The second part uses the saved ChromaDB data to answer your questions:
+    </p>
+    <ol>
+      <li>Load the saved collection from Google Drive.</li>
+      <li>Search for the chunks most similar to your question.</li>
+      <li>Send those chunks as context to a Large Language Model (e.g., LLaMA 3 via Groq) to generate an answer.</li>
+      <li>Show helpful metrics to understand how well the answer matches the source text.</li>
+    </ol>
+  `
+},
+
+{
+  title: "Part 2 — UI (Query Screen)",
+  content: `
+    <p>The interactive interface lets you:</p>
+    <ul>
+      <li>Type your question in a text box.</li>
+      <li>Choose an intent (e.g., Default, Didactic, Legal Summary) to guide the answer style.</li>
+      <li>Adjust the language model’s creativity with a temperature slider.</li>
+      <li>See the retrieved chunks, the generated answer, and quality metrics side-by-side.</li>
+    </ul>
+    <p>
+      This screen is for exploring the indexed documents repeatedly without needing to re-index.
+    </p>
+    <img src="chroma2.jpg" alt="ChromaDB Query Interface" style="max-width: 100%; height: auto;" />
+  `
+},
+
+{
+  title: "Metrics — What we compute and why",
+  content: `
+    <p>
+      To help evaluate answer quality, we compute these simple metrics comparing the answer to the retrieved text:
+    </p>
+    <ul>
+      <li><strong>Embedding Similarity:</strong> how semantically close the answer is to the retrieved context (using vector math).</li>
+      <li><strong>Context Precision:</strong> the proportion of unique answer words found in the context (how much of the answer is supported).</li>
+      <li><strong>Context Recall:</strong> the proportion of unique context words included in the answer (how much of the context is covered).</li>
+    </ul>
+    <p>
+      Note: these compare to the retrieved text, not a perfect answer. For full evaluation, you’d add human-labeled data and more metrics.
+    </p>
+  `
+},
+
+{
+  title: "Results analysis — How to read the metrics",
+  content: `
+    <p>What the numbers mean and how to improve:</p>
+    <ul>
+      <li><strong>High similarity & precision:</strong> the answer is well grounded and accurate.</li>
+      <li><strong>High similarity but low precision/recall:</strong> the answer might be on topic but not well supported (risk of hallucination).</li>
+      <li><strong>Low similarity:</strong> the retrieved chunks might be irrelevant or the model prompt needs improvement.</li>
+    </ul>
+    <p>
+      Suggestions: adjust chunk size, increase number of retrieved chunks, improve prompts, or use human-reviewed answers for evaluation.
+    </p>
+  `
+},
+
+{
+  title: "System Flow (textual diagram)",
+  content: `
+    <p>Overview of the main workflow:</p>
+    <pre>
+PDF upload  -->  Text extraction  -->  Chunking (chunk_size/overlap)
+                    |
+                    v
+            Embedding generation
+                    |
+                    v
+           ChromaDB collection (saved to Drive)
+                    |
+           ------------------------------
+           |                            |
+           v                            v
+     User queries                 Admin / re-index
+           |
+           v
+ Similarity search (k-NN) -> LLM prompt (context + question) -> Answer + Metrics
+    </pre>
+  `
+},
+
+{
+  title: "Future versions / roadmap",
+  content: `
+    <ul>
+      <li>Support multiple PDFs and multi-document collections with richer metadata (source, section, page).</li>
+      <li>Integrate other embedding models and compare performance (e.g., larger SBERTs, OpenAI embeddings).</li>
+      <li>Add LLM-as-judge evaluation and human-in-the-loop labeling for ground truth.</li>
+      <li>Create a lightweight dashboard for tracking metrics and query performance.</li>
+      <li>Explore managed vector DBs (Pinecone, Milvus) for better scalability in production.</li>
+    </ul>
+  `
+},
+
+{
+  title: "Conclusion",
+  content: `
+    <p>
+      This project provides a practical, compact demonstration of how vector databases like ChromaDB and transformer embeddings
+      enable efficient semantic search and question answering on large documents such as the GDPR.
+    </p>
+    <p>
+      It covers key engineering steps — chunking, embedding, persistence, retrieval, and LLM integration — and provides simple
+      metrics to assess how well answers are grounded.
+    </p>
+    <p>
+      This repository is a strong portfolio example of vector database skills and a foundation for more advanced RAG experiments.
+    </p>
+  `
+}
+
+
+
+   
+
+  ];
+
+  let currentIndex = 0;
+
+
+function showSlide(index) {
+  const slide = slides[index];
+  const container = document.getElementById('slide-content');
+  container.innerHTML = `<h2>${slide.title}</h2>${slide.content}`;
+  currentIndex = index;
+  updateButtons();
+}
+
+  function updateButtons() {
+    document.getElementById('btn-prev').disabled = currentIndex === 0;
+    document.getElementById('btn-next').disabled = currentIndex === slides.length - 1;
+  }
+
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    if (currentIndex > 0) showSlide(currentIndex - 1);
+  });
+
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) showSlide(currentIndex + 1);
+  });
+
+  document.getElementById('btn-home').addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+
+  // Initialize
+  showSlide(0);
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.error("Service Worker registration failed:", err));
+  }
+</script>
+
+</body>
+</html>
